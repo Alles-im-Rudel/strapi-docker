@@ -11,9 +11,12 @@ services:
     ports:
       - '${APP_PORT:-1337}:1337'
     environment:
-      #MYSQL_USER: '${DATABASE_USERNAME:-username}'
-      #MYSQL_PASSWORD: '${DATABASE_PASSWORD:-password}'
-      #MYSQL_DATABASE: '${DATABASE_NAME:-database}'
+      DB_CONNECTION: '${DATABASE_CONNECTION:-mysql}'
+      DB_HOST: '${DATABASE_HOST:-db}'
+      DB_PORT: '${DATABASE_PORT:-3306}'
+      DB_USERNAME: '${DATABASE_USERNAME:-username}'
+      DB_PASSWORD: '${DATABASE_PASSWORD:-password}'
+      DB_DATABASE: '${DATABASE_NAME:-database}'
 
       HOST: '${STRAPI_HOST:-0.0.0.0}'
       PORT: '${STRAPI_PORT:-1337}'
@@ -22,16 +25,16 @@ services:
       ADMIN_JWT_SECRET: '${STRAPI_ADMIN_JWT_SECRET:-tobemodified}'
       JWT_SECRET: '${STRAPI_JWT_SECRET:-tobemodified}'
 
-  #db:
-  #  image: mariadb:10.5
-  #  restart: unless-stopped
-  #  environment:
-  #    MYSQL_DATABASE: '${DATABASE_NAME:-database}'
-  #    MYSQL_USER: '${DATABASE_USERNAME:-username}'
-  #    MYSQL_PASSWORD: '${DATABASE_PASSWORD:-password}'
-  #    MYSQL_RANDOM_ROOT_PASSWORD: '1'
-  #  volumes:
-  #    - db:/var/lib/mysql
+  db:
+    image: mariadb:10.5
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: '${DATABASE_NAME:-database}'
+      MYSQL_USER: '${DATABASE_USERNAME:-username}'
+      MYSQL_PASSWORD: '${DATABASE_PASSWORD:-password}'
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
 
-#volumes:
-#  db:
+volumes:
+  db:
