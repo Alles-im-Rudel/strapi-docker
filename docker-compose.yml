@@ -24,6 +24,8 @@ services:
       API_TOKEN_SALT: '${STRAPI_API_TOKEN_SALT:-tobemodified}'
       ADMIN_JWT_SECRET: '${STRAPI_ADMIN_JWT_SECRET:-tobemodified}'
       JWT_SECRET: '${STRAPI_JWT_SECRET:-tobemodified}'
+    volumes:
+      - uploads:/opt/app/public/uploads
 
   db:
     image: mariadb:10.5
@@ -38,3 +40,4 @@ services:
 
 volumes:
   db:
+  uploads:
